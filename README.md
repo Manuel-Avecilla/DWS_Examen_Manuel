@@ -10,28 +10,37 @@ También incluye un sistema de **notificaciones** y **perfiles de usuario**.
 ```bash
 git clone git@github.com:Manuel-Avecilla/DWS_Examen_Manuel.git
 ```
-#### 2. Crear entorno virtual:
+#### 2. Acceder al directorio del proyecto:
 ```bash
 cd DWS_Examen_Manuel/app/
 ```
+#### 3. Crear un entorno virtual:
 ```bash
 python3 -m venv myvenv
 ```
-#### 3. Activar entorno:
+#### 4. Activar el entorno virtual:
 ```bash
 source myvenv/bin/activate
 ```
-#### 4. Actualizar pip (opcional, pero recomendable):
+#### 5. Actualizar `pip`:
 ```bash
 python -m pip install --upgrade pip
 ```
-#### 5. Instalar los requerimientos del proyecto:
+#### 6. Instalar los requerimientos del proyecto:
 ```bash
 pip install -r requirements.txt
 ```
-#### 6. Creamos la base de datos:
+#### 7. Crear la base de datos y aplicar migraciones:
 ```bash
 python manage.py migrate
+```
+#### 8. Cargar datos iniciales:
+```bash
+python manage.py loaddata examen/fixtures/datos.json
+```
+#### 9. Iniciar el servidor de desarrollo:
+```bash
+python manage.py runserver
 ```
 ---
 ## Documentación

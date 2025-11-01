@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'examen',
     'debug_toolbar',
+    'django_seed',
 ]
 
 MIDDLEWARE = [
