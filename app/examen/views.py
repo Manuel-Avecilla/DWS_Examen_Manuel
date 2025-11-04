@@ -69,6 +69,22 @@ def dame_estudios_analisis_year(request, year):
 
 #------------------------------------------------------------------------------------------
 
+def dame_videojuegos_estudio_buenos(request,id_estudio):
+    
+    videojuegos = (
+        Videojuego.objects
+        .select_related("estudio_desarrollo")
+        .prefetch_related("plataforma", "estudio_desarrollo__sedeEstudio")
+        .filter(estudio_desarrollo_id = id_estudio)
+        .annotate(media = Avg("analisisVideojuego__puntuacion"))
+        .filter(media__gt=7)
+        .all()
+    )
+    
+    return render(request,'lista_videojuegos.html',{'Videojuegos_Mostrar':videojuegos})
+
+#------------------------------------------------------------------------------------------
+
 
 
 #------------------------------------------------------------------------------------------
