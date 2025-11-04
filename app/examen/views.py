@@ -40,7 +40,23 @@ def dame_videojuegos_buenos(request, fabricante,nombre_plataforma,puntuacion):
 
 #------------------------------------------------------------------------------------------
 
+def dame_videojuegos_sin_plataformas(request):
+    
+    videojuegos = (
+        Videojuego.objects
+        .select_related("estudio_desarrollo")
+        .prefetch_related("plataforma", "estudio_desarrollo__sedeEstudio")
+        .filter(plataforma = None)
+        .all()
+    )
+    
+    return render(request,'lista_videojuegos.html',{'Videojuegos_Mostrar':videojuegos})
 
+#------------------------------------------------------------------------------------------
+
+
+
+#------------------------------------------------------------------------------------------
 
 # Errores
 def mi_error_404(request,exception=None):
