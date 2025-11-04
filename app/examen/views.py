@@ -1,10 +1,27 @@
 from django.shortcuts import render
 from django.views.defaults import page_not_found
+from .models import *
 
 # Create your views here.
 
 def index(request):
     return render(request, 'index.html')
+
+#------------------------------------------------------------------------------------------
+
+def dame_videojuegos_titulo_pais(request, titulo, pais):
+    
+    videojuegos = (
+        Videojuego.objects
+        .select_related("estudio_desarrollo")
+        .prefetch_related("plataforma", "estudio_desarrollo__sedeEstudio")
+        .filter(titulo__contains = titulo, estudio_desarrollo__sedeEstudio__pais__contains = pais)
+        .all()
+    )
+    
+    return render(request,'lista_videojuegos.html',{'Videojuegos_Mostrar':videojuegos})
+
+#------------------------------------------------------------------------------------------
 
 
 
