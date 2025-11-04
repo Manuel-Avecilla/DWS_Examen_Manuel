@@ -85,7 +85,19 @@ def dame_videojuegos_estudio_buenos(request,id_estudio):
 
 #------------------------------------------------------------------------------------------
 
-
+def dame_ultimo_analisis(request, critico_nombre, fabricante, id_estudio, id_sede):
+    
+    analisis = (
+        Analisis.objects
+        .select_related("videojuego")
+        .filter(critico__contains=critico_nombre)
+        .filter(videojuego__plataforma__fabricante__contains=fabricante)
+        .filter(videojuego__estudio_desarrollo_id = id_estudio)
+        .filter(videojuego__estudio_desarrollo__sedeEstudio__id = id_sede)
+        .order_by("-fecha_analisis")[:1].get()
+    )
+    
+    return render(request,'analisis.html',{'Analisis_Mostrar':analisis})
 
 #------------------------------------------------------------------------------------------
 
