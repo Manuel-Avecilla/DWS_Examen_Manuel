@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista Estudios</title>
+</head>
+<body>
+    <h1>Lista Estudios</h1>
+    <hr>
+
+    {% for estudio in Estudios_Mostrar %}
+    <hr>
+    <h3>Nombre: {{estudio.nombre}}</h3>
+        <ul>
+        {% for videojuego in estudio.videojuegoEstudio.all %}
+            <li>Videojuego: {{videojuego.titulo}}</li>
+            <ul>
+            {% for analisis in videojuego.analisisVideojuego.all %}
+                <li>Analisis: {{analisis.puntuacion}}</li>
+            {% endfor %}
+            </ul>
+            <br>
+        {% endfor %}
+        </ul>
+    <hr>
+    {% endfor %}
+
+</body>
+</html>

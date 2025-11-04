@@ -54,6 +54,21 @@ def dame_videojuegos_sin_plataformas(request):
 
 #------------------------------------------------------------------------------------------
 
+def dame_estudios_analisis_year(request, year):
+    
+    estudios = (
+        Estudio.objects
+        .prefetch_related("videojuegoEstudio__analisisVideojuego")
+        .filter(videojuegoEstudio__analisisVideojuego__fecha_analisis__year = year)
+        .order_by("-videojuegoEstudio__analisisVideojuego__puntuacion")
+        .all()
+        .distinct()
+    )
+    
+    return render(request,'lista_estudios.html',{'Estudios_Mostrar':estudios})
+
+#------------------------------------------------------------------------------------------
+
 
 
 #------------------------------------------------------------------------------------------
