@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.views.defaults import page_not_found
+from django.db.models import Q , Prefetch, Avg, Max, Min
 from .models import *
 
 # Create your views here.
@@ -17,6 +18,22 @@ def dame_videojuegos_titulo_pais(request, titulo, pais):
         .prefetch_related("plataforma", "estudio_desarrollo__sedeEstudio")
         .filter(titulo__contains = titulo, estudio_desarrollo__sedeEstudio__pais__contains = pais)
         .all()
+    )
+    
+    return render(request,'lista_videojuegos.html',{'Videojuegos_Mostrar':videojuegos})
+
+#------------------------------------------------------------------------------------------
+
+def dame_videojuegos_buenos(request, fabricante,nombre_plataforma,puntuacion):
+    
+    videojuegos = (
+        Videojuego.objects
+        .select_related("estudio_desarrollo")
+        .prefetch_related("plataforma", "estudio_desarrollo__sedeEstudio")
+        .filter(Q(plataforma__fabricante__contains = fabricante)|Q(plataforma__nombre__contains = nombre_plataforma))
+        .filter(analisisVideojuego__puntuacion__gt=puntuacion)
+        .all()
+        .distinct()
     )
     
     return render(request,'lista_videojuegos.html',{'Videojuegos_Mostrar':videojuegos})

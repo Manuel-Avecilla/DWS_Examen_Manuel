@@ -11,7 +11,7 @@
     <hr>
 
     {% for videojuego in Videojuegos_Mostrar %}
-    
+    <hr>
     <h3>Titulo: {{videojuego.titulo}}</h3>
     <h3>Ventas estimadas: {{videojuego.ventas_estimadas}}</h3>
 
@@ -20,10 +20,12 @@
     <h3>Plataformas</h3>
     <ul>
         {% for plataforma in videojuego.plataforma.all %}
-            <li>Plataforma: {{plataforma.nombre}}</li>
+            <li>Plataforma - nombre: {{plataforma.nombre}}</li>
+            <li>Plataforma - fabricante: {{plataforma.fabricante}}</li>
+            <br>
         {% endfor %}
     </ul>
-
+    <hr>
     {% endfor %}
 
 </body>
