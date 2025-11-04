@@ -1,8 +1,5 @@
 # Examen - Desarrollo Web Entorno Servidor
 
-Este proyecto está desarrollado con **Django** y tiene como objetivo gestionar concursos, permitiendo que **administradores** creen competencias, **participantes** se inscriban y presenten trabajos, y **jurados** los evalúen.  
-También incluye un sistema de **notificaciones** y **perfiles de usuario**.
-
 ---
 ## Instalación y ejecución en local
 
